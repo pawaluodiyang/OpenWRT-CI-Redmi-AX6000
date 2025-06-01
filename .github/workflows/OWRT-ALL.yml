@@ -3,16 +3,17 @@ name: OWRT-ALL
 
 #CI计划
 on:
-  #自动编译：当Auto-Clean运行完成后
+  # 自动编译：当 Auto-Clean 运行完成后
   workflow_run:
     workflows: ["Auto-Clean"]
     types:
       - completed
-  #手动编译
+
+  # 手动编译
   workflow_dispatch:
     inputs:
       PACKAGE:
-        description: '手动调整插件包，多个请用\n符号隔开。'
+        description: '手动调整插件包，多个请用 \n 符号隔开。'
         required: false
         type: string
       TEST:
@@ -20,6 +21,11 @@ on:
         default: 'false'
         required: false
         type: boolean
+
+  # 添加定时自动执行：每天北京时间早上 2 点（UTC 时间 18:00）
+  schedule:
+    - cron: '0 18 * * *'
+
 
 #CI权限
 permissions: write-all
